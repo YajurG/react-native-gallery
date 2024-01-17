@@ -1,118 +1,141 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
+'use strict';
+import {TextInput} from 'react-native';
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {Example} from './components/Example';
+import {Page} from './components/Page';
+// import {useTheme} from '@react-navigation/native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export const TextInputExamplePage: React.FunctionComponent<{}> = () => {
+  // const {colors} = useTheme();
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  const [text1, setText1] = React.useState('');
+  const [text2, setText2] = React.useState('');
+  const [text3, setText3] = React.useState('');
+  const [text4, setText4] = React.useState('');
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const onChangeText1 = (text: string) => {
+    setText1(text);
+  };
+  const onChangeText2 = (text: string) => {
+    setText2(text);
+  };
+  const onChangeText3 = (text: string) => {
+    setText3(text);
+  };
+  const onChangeText4 = (text: string) => {
+    setText4(text);
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
+  const example1jsx = `<TextInput
+  style={{borderColor: colors.border, borderWidth: 1}}
+  onChangeText={onChangeText1}
+  value={text1}/>`;
+  const example2jsx = `<TextInput
+  style={{borderColor: colors.border, borderWidth: 1}}
+  onChangeText={onChangeText2}
+  value={text2}
+  multiline
+  placeholder="Enter multiline text input here..."/>`;
+  const example3jsx = `<TextInput
+  style={{
+    borderColor: colors.border,
+    borderWidth: 1,
+    backgroundColor: colors.primary,
+    fontStyle: 'italic',
     fontWeight: '700',
-  },
-});
+    color: colors.card
+  }}
+  onChangeText={onChangeText3}
+  value={text3}/>`;
+  const example4jsx = `<TextInput
+  style={{borderColor: colors.border, borderWidth: 1}}
+  onChangeText={onChangeText4}
+  value={text4}
+  editable={false}
+  placeholder="Disabled TextInput..."
+  placeholderTextColor={colors.primary}/>`;
 
-export default App;
+  return (
+    <Page
+      title="TextInput"
+      description="TextInput is a foundational component for inputting text into an app via a keyboard."
+      wrappedNativeControl={{
+        control: 'TextBox',
+        url: 'https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.textbox?view=winrt-19041',
+      }}
+      componentType="Core"
+      pageCodeUrl="https://github.com/microsoft/react-native-gallery/blob/main/src/examples/TextInputExamplePage.tsx"
+      documentation={[
+        {
+          label: 'TextInput',
+          url: 'https://reactnative.dev/docs/textinput',
+        },
+        {
+          label: 'TextInput Source Code',
+          url: 'https://github.com/microsoft/react-native-windows/blob/master/vnext/Microsoft.ReactNative/Views/TextInputViewManager.h',
+        },
+        {
+          label: 'Wrapped XAML Control: PasswordBox',
+          url: 'https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.passwordbox?view=winrt-19041',
+        },
+      ]}>
+      <Example title="A simple TextInput." code={example1jsx}>
+        <TextInput
+          style={{
+            borderColor: colors.border,
+            borderWidth: 1,
+            color: colors.text,
+          }}
+          onChangeText={onChangeText1}
+          value={text1}
+          placeholder="A simple TextInput..."
+        />
+      </Example>
+      <Example
+        title="A multiline TextInput with placeholder text."
+        code={example2jsx}>
+        <TextInput
+          style={{
+            borderColor: colors.border,
+            borderWidth: 1,
+            color: colors.text,
+          }}
+          onChangeText={onChangeText2}
+          value={text2}
+          multiline
+          placeholder="Enter multiline text input here..."
+        />
+      </Example>
+      <Example
+        title="A colored TextInput with bolded and italicized text."
+        code={example3jsx}>
+        <TextInput
+          style={{
+            borderColor: colors.border,
+            borderWidth: 1,
+            backgroundColor: 'rgb(52, 122, 226)',
+            fontStyle: 'italic',
+            fontWeight: '700',
+            color: colors.card,
+          }}
+          onChangeText={onChangeText3}
+          value={text3}
+          placeholder="A colored TextInput with bolded and italicized text..."
+          placeholderTextColor="rgb(0,0,0)"
+        />
+      </Example>
+      <Example
+        title="A disabled TextInput with colored placeholder text."
+        code={example4jsx}>
+        <TextInput
+          style={{borderColor: colors.border, borderWidth: 1}}
+          onChangeText={onChangeText4}
+          value={text4}
+          editable={false}
+          placeholder="Disabled TextInput..."
+          placeholderTextColor={colors.primary}
+        />
+      </Example>
+    </Page>
+  );
+};
