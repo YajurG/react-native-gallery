@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Hyperlink} from './Controls'
 // import {useTheme} from '@react-navigation/native';
 // import {HyperlinkButton} from 'react-native-xaml';
 
@@ -28,13 +29,12 @@ export function LinkTile(props: {
       <Text accessibilityRole="header" style={styles.hyperlinkTileTitle}>
         {props.title}
       </Text>
-      {/* {props.links.map((hyp) => (
-        <HyperlinkButton
-          key={hyp.label}
-          content={{string: hyp.label}}
-          navigateUri={hyp.url}
+      {props.links.map((hyp) => (
+        <Hyperlink 
+          url={hyp.url}
+          text={hyp.label}
         />
-      ))} */}
+      ))}
     </View>
   );
 }
